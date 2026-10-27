@@ -1,0 +1,9 @@
+{
+  "name": "roguelite-une-main",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/",
+    "start": "python -m http.server 8080"
+  }
+}
