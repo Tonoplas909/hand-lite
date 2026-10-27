@@ -43,7 +43,7 @@
 **Interfaces:**
 - Produces: `CONFIG` (export nommé de `src/config.js`) ; `mulberry32(seed: number) -> () => number` (valeurs dans `[0,1)`) et `pick(rng, array) -> element` dans `src/rng.js`.
 
-- [ ] **Step 1: Initialiser le projet.** `git init` dans `roguelite-une-main/`. `package.json` : `"type": "module"`, scripts `"test": "node --test tests/"` et `"start": "python -m http.server 8080"`. `.gitignore` : `node_modules/`.
+- [ ] **Step 1: Initialiser le projet.** Le dépôt git est déjà initialisé et relié à `origin` (ne pas refaire `git init`). `package.json` : `"type": "module"`, scripts `"test": "node --test tests/"` et `"start": "python -m http.server 8080"`. `.gitignore` : `node_modules/`.
 - [ ] **Step 2: Écrire le test qui échoue** `tests/rng.test.js` : deux `mulberry32(42)` produisent la même suite de 5 valeurs ; toutes les valeurs sont dans `[0,1)` ; `pick(rng, ['a','b','c'])` renvoie toujours un élément du tableau sur 100 tirages.
 - [ ] **Step 3: Lancer** `npm test` → échec (module absent).
 - [ ] **Step 4: Implémenter `src/rng.js`** (algorithme mulberry32 standard).
@@ -267,6 +267,24 @@
 - [ ] **Step 3: Vérifier la robustesse** : vider le `localStorage` ou y mettre `{pas du json`, recharger → le jeu démarre normalement ; laisser l'onglet en arrière-plan 30 s puis revenir → aucun saut anormal.
 - [ ] **Step 4: Ajuster `config.js`** si la run est trop facile ou trop dure, relancer `npm test` (PASS attendu), noter les changements dans le message de commit.
 - [ ] **Step 5: Commit** `chore: équilibrage v1`.
+
+---
+
+### Task 13: Finitions et bonnes pratiques du dépôt
+
+**Files:**
+- Create: `README.md`, `LICENSE`, `.editorconfig`, `.gitattributes`, `.github/workflows/ci.yml`
+- Modify: `.gitignore`, `package.json`
+
+Le dépôt git existe déjà et est relié à `https://github.com/Tonoplas909/hand-lite.git` (branche `main`) : ne pas refaire `git init`.
+
+- [ ] **Step 1: `README.md`** : titre et pitch d'une phrase ; section Jeu (principe, jouable d'une main, contenu : 8 salles + boss, 5 ennemis, 4 armes, 8 améliorations) ; tableau des contrôles (ZQSD/WASD + flèches, Espace = dash/confirmer, Échap = pause, Tab = changer de main) ; Lancer le jeu (`npm start` puis `http://localhost:8080`, prérequis Python 3) ; Tests (`npm test`, prérequis Node ≥ 18) ; structure du dossier (`src/`, `tests/`, `docs/`) avec renvoi vers `docs/spec-design.md` et le plan ; licence.
+- [ ] **Step 2: `.gitignore`** : compléter avec `node_modules/`, `.DS_Store`, `Thumbs.db`, `*.log`, `.vscode/`, `.idea/`, `.env`, `.claude/`.
+- [ ] **Step 3: `.editorconfig`** (UTF-8, fin de ligne LF, indentation 2 espaces, newline final, suppression des espaces en fin de ligne) et `.gitattributes` (`* text=auto eol=lf`).
+- [ ] **Step 4: `LICENSE`** (MIT, année 2026, titulaire Tonoplas909) ; renseigner `"license": "MIT"` dans `package.json`, ainsi que `description`, `repository` (URL du dépôt), `engines.node` (`>=18`) et `"private": true`.
+- [ ] **Step 5: CI** `.github/workflows/ci.yml` : sur `push` et `pull_request` vers `main`, job Ubuntu avec `actions/checkout`, `actions/setup-node` (Node 20), puis `npm test`.
+- [ ] **Step 6: Vérifier** : `npm test` → PASS ; relire le README en suivant ses propres instructions depuis zéro (cloner dans un dossier vide, `npm start`, le jeu s'ouvre) ; `git status` ne montre aucun fichier parasite.
+- [ ] **Step 7: Commit et push** `docs: readme, licence et configuration du dépôt` puis `git push`. Vérifier que la CI passe au vert sur GitHub.
 
 ---
 
