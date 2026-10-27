@@ -11,7 +11,7 @@ export const CONFIG = {
     dashCooldown: 1.2,
     hitInvuln: 1.0,
   },
-  ROOMS: { count: 8, minWaves: 2, maxWaves: 3 },
+  ROOMS: { count: 8, minWaves: 2, maxWaves: 3, waveDelay: 0.8 },
   ENEMIES: {
     rodeur: { hp: 3, speed: 90, radius: 10 },
     tireur: { hp: 3, speed: 60, radius: 10, range: 260, fireInterval: 1.6, projectileSpeed: 200 },

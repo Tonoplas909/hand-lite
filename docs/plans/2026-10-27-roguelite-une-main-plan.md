@@ -43,7 +43,7 @@
 **Interfaces:**
 - Produces: `CONFIG` (export nommé de `src/config.js`) ; `mulberry32(seed: number) -> () => number` (valeurs dans `[0,1)`) et `pick(rng, array) -> element` dans `src/rng.js`.
 
-- [ ] **Step 1: Initialiser le projet.** Le dépôt git est déjà initialisé et relié à `origin` (ne pas refaire `git init`). `package.json` : `"type": "module"`, scripts `"test": "node --test tests/"` et `"start": "python -m http.server 8080"`. `.gitignore` : `node_modules/`.
+- [ ] **Step 1: Initialiser le projet.** Le dépôt git est déjà initialisé et relié à `origin` (ne pas refaire `git init`). `package.json` : `"type": "module"`, scripts `"test": "node --test tests/"` et `"start": "python -m http.server 8123"`. `.gitignore` : `node_modules/`.
 - [ ] **Step 2: Écrire le test qui échoue** `tests/rng.test.js` : deux `mulberry32(42)` produisent la même suite de 5 valeurs ; toutes les valeurs sont dans `[0,1)` ; `pick(rng, ['a','b','c'])` renvoie toujours un élément du tableau sur 100 tirages.
 - [ ] **Step 3: Lancer** `npm test` → échec (module absent).
 - [ ] **Step 4: Implémenter `src/rng.js`** (algorithme mulberry32 standard).
@@ -252,7 +252,7 @@
 - [ ] **Step 2: Lancer** → échec. **Step 3: Implémenter `src/loop.js`.** **Step 4: Lancer** `npm test` → PASS.
 - [ ] **Step 5: Implémenter `render.js`** : formes géométriques (cercles pour joueur/ennemis/projectiles, jauge de vie du boss, cœurs en haut à gauche, numéro de salle). Écran titre : titre, **main active (Gauche/Droite) avec les touches à utiliser, Tab pour basculer**, « Espace : jouer », accès à la boutique.
 - [ ] **Step 6: Implémenter `main.js`** : glue des états de `state.js`. `run` : met à jour joueur, armes, ennemis, projectiles, collisions (projectiles joueur→ennemis, projectiles et contact ennemis→joueur, explosions), lance la vague suivante quand `aliveCount === 0`, déclenche `roomCleared`, puis le boss après la salle 8. `upgrade` : 3 cartes, navigation gauche/droite + Dash, raccourcis `Digit1..3`. Fin de run : crédite `coinsForRun`, sauvegarde, écran de fin puis titre. La main choisie (Tab) est enregistrée dans la sauvegarde. Applique `applyStartBonuses` et l'arme sélectionnée au début de chaque run. Menus et boutique : uniquement haut/bas/gauche/droite + Dash.
-- [ ] **Step 7: Vérification manuelle** : `npm start`, ouvrir `http://localhost:8080`. Attendus : (a) l'écran titre s'affiche et Tab bascule l'indication de main ; (b) avec ZQSD **puis** avec les flèches, le joueur bouge, le tir part tout seul, Espace dash ; (c) tout le jeu (titre, run, choix d'amélioration, pause, fin, boutique) se pilote sans souris ; (d) la console ne montre aucune erreur.
+- [ ] **Step 7: Vérification manuelle** : `npm start`, ouvrir `http://localhost:8123`. Attendus : (a) l'écran titre s'affiche et Tab bascule l'indication de main ; (b) avec ZQSD **puis** avec les flèches, le joueur bouge, le tir part tout seul, Espace dash ; (c) tout le jeu (titre, run, choix d'amélioration, pause, fin, boutique) se pilote sans souris ; (d) la console ne montre aucune erreur.
 - [ ] **Step 8: Commit** `feat: rendu et boucle principale`.
 
 ---
@@ -278,7 +278,7 @@
 
 Le dépôt git existe déjà et est relié à `https://github.com/Tonoplas909/hand-lite.git` (branche `main`) : ne pas refaire `git init`.
 
-- [ ] **Step 1: `README.md`** : titre et pitch d'une phrase ; section Jeu (principe, jouable d'une main, contenu : 8 salles + boss, 5 ennemis, 4 armes, 8 améliorations) ; tableau des contrôles (ZQSD/WASD + flèches, Espace = dash/confirmer, Échap = pause, Tab = changer de main) ; Lancer le jeu (`npm start` puis `http://localhost:8080`, prérequis Python 3) ; Tests (`npm test`, prérequis Node ≥ 18) ; structure du dossier (`src/`, `tests/`, `docs/`) avec renvoi vers `docs/spec-design.md` et le plan ; licence.
+- [ ] **Step 1: `README.md`** : titre et pitch d'une phrase ; section Jeu (principe, jouable d'une main, contenu : 8 salles + boss, 5 ennemis, 4 armes, 8 améliorations) ; tableau des contrôles (ZQSD/WASD + flèches, Espace = dash/confirmer, Échap = pause, Tab = changer de main) ; Lancer le jeu (`npm start` puis `http://localhost:8123`, prérequis Python 3) ; Tests (`npm test`, prérequis Node ≥ 18) ; structure du dossier (`src/`, `tests/`, `docs/`) avec renvoi vers `docs/spec-design.md` et le plan ; licence.
 - [ ] **Step 2: `.gitignore`** : compléter avec `node_modules/`, `.DS_Store`, `Thumbs.db`, `*.log`, `.vscode/`, `.idea/`, `.env`, `.claude/`.
 - [ ] **Step 3: `.editorconfig`** (UTF-8, fin de ligne LF, indentation 2 espaces, newline final, suppression des espaces en fin de ligne) et `.gitattributes` (`* text=auto eol=lf`).
 - [ ] **Step 4: `LICENSE`** (MIT, année 2026, titulaire Tonoplas909) ; renseigner `"license": "MIT"` dans `package.json`, ainsi que `description`, `repository` (URL du dépôt), `engines.node` (`>=18`) et `"private": true`.
