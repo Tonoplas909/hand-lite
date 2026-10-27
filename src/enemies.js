@@ -72,3 +72,72 @@ export function damageEnemy(e, amount) {
 export function touchesPlayer(e, player) {
   return Math.hypot(e.x - player.x, e.y - player.y) <= e.radius + player.radius;
 }
+
+export function createBoss(x, y) {
+  const c = CONFIG.BOSS;
+  return {
+    id: nextId++, type: 'boss', x, y, hp: c.hp, radius: c.radius, speed: 0, timer: 0, fuseTimer: null,
+    phase: 1, chargeVx: 0, chargeVy: 0, chargeLeft: 0,
+    ringTimer: 0, chargeTimer: 0, summonTimer: 0,
+  };
+}
+
+export function bossPhase(b) {
+  const ratio = b.hp / CONFIG.BOSS.hp;
+  if (ratio < CONFIG.BOSS.phase3At) return 3;
+  if (ratio < CONFIG.BOSS.phase2At) return 2;
+  return 1;
+}
+
+export function updateBoss(b, player, dt) {
+  const c = CONFIG.BOSS;
+  const out = { projectiles: [], summons: [] };
+  if (b.hp <= 0) return out;
+  b.phase = bossPhase(b);
+
+  b.ringTimer += dt;
+  if (b.ringTimer >= c.ringInterval - EPS) {
+    b.ringTimer -= c.ringInterval;
+    for (let i = 0; i < c.ringCount; i++) {
+      const a = (2 * Math.PI * i) / c.ringCount;
+      out.projectiles.push({
+        x: b.x, y: b.y,
+        vx: Math.cos(a) * c.projectileSpeed, vy: Math.sin(a) * c.projectileSpeed,
+        radius: 4, damage: 1,
+      });
+    }
+  }
+
+  if (b.phase >= 2) {
+    b.chargeTimer += dt;
+    if (b.chargeTimer >= c.chargeInterval - EPS) {
+      b.chargeTimer -= c.chargeInterval;
+      const v = toward(b, player);
+      const dir = v.d < EPS ? { x: 1, y: 0 } : v;
+      b.chargeVx = dir.x * c.chargeSpeed;
+      b.chargeVy = dir.y * c.chargeSpeed;
+      b.chargeLeft = c.chargeDuration;
+    }
+  }
+  if (b.chargeLeft > 0) {
+    const t = Math.min(dt, b.chargeLeft);
+    b.x += b.chargeVx * t;
+    b.y += b.chargeVy * t;
+    b.chargeLeft -= t;
+    const { w, h } = CONFIG.ARENA;
+    b.x = Math.min(w - b.radius, Math.max(b.radius, b.x));
+    b.y = Math.min(h - b.radius, Math.max(b.radius, b.y));
+  }
+
+  if (b.phase >= 3) {
+    b.summonTimer += dt;
+    if (b.summonTimer >= c.summonInterval - EPS) {
+      b.summonTimer -= c.summonInterval;
+      for (let i = 0; i < c.summonCount; i++) {
+        const a = (2 * Math.PI * i) / c.summonCount;
+        out.summons.push({ type: 'rodeur', x: b.x + Math.cos(a) * (b.radius + 20), y: b.y + Math.sin(a) * (b.radius + 20) });
+      }
+    }
+  }
+  return out;
+}

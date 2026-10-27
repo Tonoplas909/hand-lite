@@ -28,6 +28,8 @@ export const CONFIG = {
     ringInterval: 1.5,
     chargeSpeed: 380,
     chargeInterval: 2.5,
+    chargeDuration: 0.4,
+    projectileSpeed: 180,
     summonInterval: 5,
     summonCount: 3,
   },
