@@ -1,0 +1,19 @@
+{
+  "name": "roguelite-une-main",
+  "version": "0.1.0",
+  "description": "Roguelite d'arène en temps réel jouable d'une seule main, dans le navigateur.",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Tonoplas909/hand-lite.git"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test tests/",
+    "start": "python -m http.server 8123"
+  }
+}
