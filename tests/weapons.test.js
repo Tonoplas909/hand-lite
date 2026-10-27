@@ -43,6 +43,7 @@ test('laser traverse deux ennemis alignes, le pistolet un seul', () => {
   const aligned = () => [enemy(1, 150, 100), enemy(2, 150, 100)];
   const laser = updateWeapon(createWeapon('laser'), owner, aligned(), 0.9)[0];
   assert.equal(laser.pierce, 99);
+  laser.x = 150;
   assert.equal(projectileHits(laser, aligned()).length, 2);
   const pist = updateWeapon(createWeapon('pistolet'), owner, aligned(), 0.4)[0];
   const hit = projectileHits({ ...pist, x: 150, y: 100 }, aligned());
@@ -51,6 +52,7 @@ test('laser traverse deux ennemis alignes, le pistolet un seul', () => {
 
 test('un projectile ne touche jamais deux fois le meme ennemi', () => {
   const laser = updateWeapon(createWeapon('laser'), owner, [enemy(1, 150, 100)], 0.9)[0];
+  laser.x = 150;
   const e = [enemy(1, 150, 100)];
   assert.equal(projectileHits(laser, e).length, 1);
   assert.equal(projectileHits(laser, e).length, 0);
@@ -58,6 +60,7 @@ test('un projectile ne touche jamais deux fois le meme ennemi', () => {
 
 test('un projectile non perçant est consomme au premier impact', () => {
   const p = updateWeapon(createWeapon('pistolet'), owner, [enemy(1, 150, 100)], 0.4)[0];
+  p.x = 150;
   projectileHits(p, [enemy(1, 150, 100)]);
   assert.ok(p.pierce < 0);
 });
