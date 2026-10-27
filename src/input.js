@@ -3,7 +3,7 @@ export const DEFAULT_BINDINGS = {
   bas: ['KeyS', 'ArrowDown'],
   gauche: ['KeyA', 'ArrowLeft'],
   droite: ['KeyD', 'ArrowRight'],
-  dash: ['Space'],
+  dash: ['Space', 'Numpad0'],
   pause: ['Escape'],
 };
 

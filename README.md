@@ -15,7 +15,7 @@ Roguelite d'arène en temps réel, jouable **entièrement d'une seule main** (ga
 | Action | Main gauche | Main droite |
 |---|---|---|
 | Se déplacer / naviguer dans les menus | Z Q S D (ou W A S D) | Flèches |
-| Dash (esquive) / valider | Espace | Espace |
+| Dash (esquive) / valider | Espace (ou 0 du pavé numérique) | Espace (ou 0 du pavé numérique) |
 | Pause | Échap | Échap |
 | Changer de main (écran titre) | Tab | Tab |
 

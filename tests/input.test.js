@@ -24,5 +24,10 @@ test('sans touche, vecteur nul sans NaN', () => {
 test('rebind remplace la touche sans toucher l original', () => {
   const b = rebind(DEFAULT_BINDINGS, 'dash', 'KeyE');
   assert.equal(actionsFromKeys(new Set(['KeyE']), b).dash, true);
-  assert.deepEqual(DEFAULT_BINDINGS.dash, ['Space']);
+  assert.deepEqual(DEFAULT_BINDINGS.dash, ['Space', 'Numpad0']);
+});
+
+test('Numpad0 declenche aussi le dash', () => {
+  assert.equal(keys('Numpad0').dash, true);
+  assert.equal(keys('Space').dash, true);
 });
